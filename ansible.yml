@@ -1,0 +1,30 @@
+---
+- name: preparation db
+  hosts: db
+  become: yes
+
+  tasks:
+  - name: Ensure postgresql is present
+     shell: ssh root@10.129.0.6 -y && apt install docker.io git -y && git clone https://github.com/fallenstar911/Ansible.git
+
+ # - name: Ensure postgresql service is started
+ #   service:
+ #    name: postgresql
+ #    state: started
+ #    -name: Execute the command in remote shell; stdout goes to the specified file on the remote.
+ #      shell: somescript.sh >> somelog.txt    target/hello-1.0.war
+
+- name: preparation tomcat
+  hosts: web
+  become: yes
+
+  tasks:
+  - name: Ensure tomcat packages is present
+    apt:
+     name: tomcat9
+     state: present
+
+  - name: Ensure nginx service is started
+    service:
+     name: tomcat
+     state: started
