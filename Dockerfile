@@ -7,7 +7,7 @@ RUN mvn package
 #RUN ls ./target/
 RUN git pull https://github.com/fallenstar911/AnsibleWar.git
 RUN git init
-RUN git remote rm origin && git remote add origin https://fallenstar911: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@github.com/fallenstar911/AnsibleWar.git
+RUN git remote rm origin && git remote add origin https://fallenstar911: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@github.com/fallenstar911/AnsibleWar.git
 RUN git add -f ./target/hello-1.0.war #
 RUN git status
 RUN git config --global user.email "sander2008.92@gmail.com"
