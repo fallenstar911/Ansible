@@ -4,8 +4,20 @@
   become: yes
 
   tasks:
-  - name: Ensure postgresql is present
-     shell: ssh root@10.129.0.6 -y && apt install docker.io git -y && git clone https://github.com/fallenstar911/Ansible.git
+  - name: Ensure db server is present
+     apt:
+       - docker.io
+       - git
+     state: present
+  - name: Clone a github repository
+      git:
+        repo: https://github.com/fallenstar911/Ansible.git
+        dest: /tmp/repos/
+        clone: yes
+        update: yes
+  - name:
+      shell: docker
+ #      ssh root@10.129.0.6 -y && apt install docker.io git -y && git clone https://github.com/fallenstar911/Ansible.git
 
  # - name: Ensure postgresql service is started
  #   service:
@@ -21,7 +33,9 @@
   tasks:
   - name: Ensure tomcat packages is present
     apt:
-     name: tomcat9
+     name:
+      - tomcat9
+      - git
      state: present
 
   - name: Ensure nginx service is started
